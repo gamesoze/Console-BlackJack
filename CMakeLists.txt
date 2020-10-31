@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(Cards)
 add_subdirectory(modules/googletest)
+add_subdirectory(Hand)
 
 add_executable(Console-BlackJack main.cpp)
 
-target_link_libraries(Console-BlackJack Cards)
+target_link_libraries(Console-BlackJack Cards Hand)

@@ -67,3 +67,15 @@ const std::string Cards::getCard(bool isBeginRound) {
     return card;
 }
 
+// Allocation new space
+Cards *Cards::copyPointer() {
+    return new Cards(*this);
+}
+
+// Copy all objects
+Cards::Cards(const Cards &obj) {
+    for (const auto &it : obj.packCards) {
+        packCards.push_back(it);
+    }
+}
+

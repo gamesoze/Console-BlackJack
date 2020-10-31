@@ -13,6 +13,9 @@ public:
     // Init
     Cards();
 
+    // Constructor copy
+    Cards(const Cards &obj);
+
     // For testing
     void printPack();
 
@@ -22,9 +25,13 @@ public:
     // Get random card and delete it from pack
     const std::string getCard(bool isBeginRound = false);
 
+    // Return copy pointer
+    Cards *copyPointer();
+
 private:
     // Check define
     void checkAndInit();
+
 private:
     // Pack of Cards
     std::deque<std::string> packCards;

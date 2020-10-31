@@ -3,10 +3,13 @@
 //
 #include "Cards.h"
 #include <iostream>
+#include "Hand.h"
 
 int main() {
-   Cards pack1;
-   pack1.printPack();
+    Cards pack;
 
-   return 0;
+    Hand left(&pack);
+
+
+    return 0;
 }
