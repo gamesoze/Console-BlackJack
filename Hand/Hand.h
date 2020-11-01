@@ -14,6 +14,10 @@ public:
     // Add 2 starts cards
     explicit Hand(Cards *ptr_cards);
 
+public:
+
+    // Init score
+
     // Get score
     int getScore();
 
@@ -22,8 +26,18 @@ public:
     virtual ~Hand();
 
 private:
+
+    void setScore();
+
+private:
+    // pointer to pack cards
     Cards *ptr_cards;
+
+    // Hand
     std::deque<std::string> hand;
+
+    // Sum of all score
+    int score;
 };
 
 

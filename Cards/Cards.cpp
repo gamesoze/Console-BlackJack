@@ -44,8 +44,8 @@ void Cards::shuffle() {
 }
 
 void Cards::printPack() {
-    for (auto &packCard : packCards) {
-        std::cout << packCard << " \n";
+    for (auto &card : packCards) {
+        std::cout << card << "\n";
     }
 }
 

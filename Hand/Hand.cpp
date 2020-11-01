@@ -2,6 +2,7 @@
 // Created by Konstantin on 10/31/2020.
 //
 #include "../Cards/Cards.h"
+#include "../Rools/Rools.h"
 #include <queue>
 #include <string>
 #include <sstream>
@@ -18,9 +19,19 @@ Hand::Hand(Cards *ptr_cards) {
 }
 
 bool Hand::addCard() {
-    return
+    return true;
 }
 
 Hand::~Hand() {
     delete ptr_cards;
+}
+
+int Hand::getScore() {
+
+
+    return 0;
+}
+
+void Hand::setScore() {
+    score = Rools::getScore(hand);
 }
