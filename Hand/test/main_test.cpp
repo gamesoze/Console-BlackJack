@@ -12,11 +12,13 @@ TEST(Hand_basic_test, UsageTest) {
 
     Hand left(&pack);
 
-    for (int i = 0; i < 100000; ++i) {
-        left.addCard();
-    }
+    for (int i = 0; i < 1000; ++i) {
+        for (int i = 0; i < 1000; ++i) {
+            left.addCard();
+        }
 
-    ASSERT_LE(left.getScore(), 40);
+        ASSERT_LE(left.getScore(), 31);
+    }
 }
 
 int main() {

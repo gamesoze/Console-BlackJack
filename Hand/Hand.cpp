@@ -39,3 +39,12 @@ int Hand::getScore() {
 void Hand::setScore() {
     score = Rools::getScore(hand);
 }
+
+Hand::Hand() {
+    // Create new pack of cards
+    this->ptr_cards = new Cards;
+
+    // add 2 start cards
+    hand.push_back(ptr_cards->getCard());
+    hand.push_back(ptr_cards->getCard());
+}

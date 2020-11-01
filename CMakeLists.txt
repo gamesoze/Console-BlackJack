@@ -7,6 +7,7 @@ add_subdirectory(Cards)
 add_subdirectory(modules/googletest)
 add_subdirectory(Hand)
 add_subdirectory(Rools)
+add_subdirectory(Player)
 
 add_executable(Console-BlackJack main.cpp)
 

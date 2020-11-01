@@ -17,6 +17,8 @@ public:
     // Add 2 starts cards
     explicit Hand(Cards *ptr_cards);
 
+    Hand();
+
 public:
     // Get score
     int getScore();
