@@ -5,9 +5,9 @@
 #include <iostream>
 #include "Hand.h"
 
+
 int main() {
     Cards pack;
-    pack.printPack();
 
     Hand left(&pack);
 

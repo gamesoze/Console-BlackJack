@@ -9,24 +9,26 @@
 #include <string>
 #include <sstream>
 
+#include "../Rools/Rools.h"
+#include "../Cards/Cards.h"
+
 class Hand {
 public:
     // Add 2 starts cards
     explicit Hand(Cards *ptr_cards);
 
 public:
-
-    // Init score
-
     // Get score
     int getScore();
 
+    // get a new card
     bool addCard();
 
+    // destructor
     virtual ~Hand();
 
 private:
-
+    // Rools::getScore(hand)
     void setScore();
 
 private:
@@ -37,7 +39,7 @@ private:
     std::deque<std::string> hand;
 
     // Sum of all score
-    int score;
+    int score = 0;
 };
 
 

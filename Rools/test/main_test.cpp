@@ -8,8 +8,8 @@
 TEST(Rools_basic_test, UsageTest) {
 
     std::deque<std::string> hand;
-    hand.push_back("2 abc");
-    hand.push_back("3 abc");
+    hand.emplace_back("2 abc");
+    hand.emplace_back("3 abc");
 
     int score = Rools::getScore(hand);
 
@@ -19,8 +19,8 @@ TEST(Rools_basic_test, UsageTest) {
 TEST(Rools_test_with_ace, UsageTest) {
 
     std::deque<std::string> hand;
-    hand.push_back("2 abc");
-    hand.push_back("Ace abc");
+    hand.emplace_back("2 abc");
+    hand.emplace_back("Ace abc");
 
     int score = Rools::getScore(hand);
 
@@ -30,9 +30,9 @@ TEST(Rools_test_with_ace, UsageTest) {
 TEST(Rools_test_with_2_ace, UsageTest) {
 
     std::deque<std::string> hand;
-    hand.push_back("2 abc");
-    hand.push_back("Ace abc");
-    hand.push_back("Ace abc");
+    hand.emplace_back("2 abc");
+    hand.emplace_back("Ace abc");
+    hand.emplace_back("Ace abc");
 
     int score = Rools::getScore(hand);
 
@@ -42,8 +42,8 @@ TEST(Rools_test_with_2_ace, UsageTest) {
 TEST(Rools_BlackJack, UsageTest) {
 
     std::deque<std::string> hand;
-    hand.push_back("10 abc");
-    hand.push_back("Ace abc");
+    hand.emplace_back("10 abc");
+    hand.emplace_back("Ace abc");
 
     int score = Rools::getScore(hand);
 

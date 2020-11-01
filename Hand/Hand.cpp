@@ -19,7 +19,13 @@ Hand::Hand(Cards *ptr_cards) {
 }
 
 bool Hand::addCard() {
-    return true;
+    if (score < 21) {
+        hand.push_back(ptr_cards->getCard());
+        setScore();
+        return true;
+    } else {
+        return false;
+    }
 }
 
 Hand::~Hand() {
@@ -27,9 +33,7 @@ Hand::~Hand() {
 }
 
 int Hand::getScore() {
-
-
-    return 0;
+    return score;
 }
 
 void Hand::setScore() {

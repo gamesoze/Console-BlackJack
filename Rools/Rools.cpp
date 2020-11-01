@@ -3,10 +3,9 @@
 //
 
 #include "../Cards/Cards.h"
-#include "../Hand/Hand.h"
-#include <map>
 #include "Rools.h"
 
+// Return score
 int Rools::getScore(const std::deque<std::string> &input) {
     // Sum score
     int score = 0;
@@ -34,6 +33,7 @@ int Rools::getScore(const std::deque<std::string> &input) {
         score += 10;
     }
 
+    // Check Aces
     if (countAce * 11 + score > 21) {
         score += countAce;
     } else {
