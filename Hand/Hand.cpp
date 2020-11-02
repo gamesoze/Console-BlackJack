@@ -11,11 +11,20 @@
 // Give 2 cards in Hand
 Hand::Hand(Cards *ptr_cards) {
     // Draw 2 cards
-    hand.push_back(ptr_cards->getCard());
-    hand.push_back(ptr_cards->getCard());
+//    hand.push_back(ptr_cards->getCard());
+//    hand.push_back(ptr_cards->getCard());
 
     // Copy pointer
     this->ptr_cards = ptr_cards->copyPointer();
+}
+
+Hand::Hand() {
+    // Create new pack of cards
+    this->ptr_cards = new Cards;
+
+    // add 2 start cards
+//    hand.push_back(ptr_cards->getCard());
+//    hand.push_back(ptr_cards->getCard());
 }
 
 bool Hand::addCard() {
@@ -40,11 +49,20 @@ void Hand::setScore() {
     score = Rools::getScore(hand);
 }
 
-Hand::Hand() {
-    // Create new pack of cards
-    this->ptr_cards = new Cards;
+const std::stringstream Hand::printHand() const {
+    std::stringstream ss_hand;
 
-    // add 2 start cards
-    hand.push_back(ptr_cards->getCard());
-    hand.push_back(ptr_cards->getCard());
+
+    for (int i = 0; i < hand.size(); ++i) {
+        ss_hand << "Card [" << std::to_string(i) << "] " << hand[i] << "\n";
+    }
+
+    return ss_hand;
 }
+
+void Hand::test() {
+    ptr_cards->printPack();
+}
+
+
+

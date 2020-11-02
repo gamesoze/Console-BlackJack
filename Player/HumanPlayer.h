@@ -6,15 +6,25 @@
 #define CONSOLE_BLACKJACK_HUMANPLAYER_H
 
 #include "Player.h"
+#include "../Cards/Cards.h"
+#include "../Hand/Hand.h"
 
 
 class HumanPlayer : public Player {
 public:
-    HumanPlayer();
+    // starts 500$ and name Anon
+    explicit HumanPlayer(Cards *ptr_cards);
 
-    HumanPlayer(std::string name, double money);
+    HumanPlayer(Cards *ptr_cards, std::string name, double money);
 
-    void pass() override;
+    // Dialog to user
+    void dialog() override;
+
+    // Bet return false if not enough money
+    bool bet() override
+
+
+    ~HumanPlayer() {}
 };
 
 

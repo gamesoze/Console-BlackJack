@@ -2,7 +2,7 @@ project(Player_test)
 
 add_executable(Player_test main_test.cpp)
 
-target_link_libraries(Player_test Hand gtest Cards Rools)
+target_link_libraries(Player_test gtest Cards Player Hand Rools)
 
 enable_testing()
 add_test(

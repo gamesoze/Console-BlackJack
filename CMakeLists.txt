@@ -11,4 +11,4 @@ add_subdirectory(Player)
 
 add_executable(Console-BlackJack main.cpp)
 
-target_link_libraries(Console-BlackJack Cards Hand Rools)
+target_link_libraries(Console-BlackJack Cards Hand Rools Player)

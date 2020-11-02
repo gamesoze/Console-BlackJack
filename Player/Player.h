@@ -5,24 +5,29 @@
 #ifndef CONSOLE_BLACKJACK_PLAYER_H
 #define CONSOLE_BLACKJACK_PLAYER_H
 
+#include "../Hand/Hand.h"
 
 class Player {
 public:
-    virtual void addCard() = 0;
-
-    virtual void pass() = 0;
+    virtual void dialog() = 0;
 
     virtual ~Player() = default;
+
+    // Bet return false if not enough money
+    virtual bool bet() = 0;
 
 protected:
     // Name of Player
     std::string name;
 
     // Count money
-    double money = 0;
+    double money;
 
     // Hand
     Hand hand;
+
+    // is Passed?
+    bool isPassed = false;
 };
 
 

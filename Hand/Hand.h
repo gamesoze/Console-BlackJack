@@ -23,11 +23,16 @@ public:
     // Get score
     int getScore();
 
+    // Print all cards in Hand
+    const std::stringstream printHand() const;
+
     // get a new card
     bool addCard();
 
     // destructor
     virtual ~Hand();
+
+    void test();
 
 private:
     // Rools::getScore(hand)
