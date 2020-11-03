@@ -14,12 +14,16 @@ void GameTable::commonBlackJack() {
 
     Cards packOfCards;
 
+    // Add gamers
     gamers.emplace_back(new HumanPlayer(&packOfCards, "Ivan", 500));
     gamers.emplace_back(new HumanPlayer(&packOfCards));
     gamers.emplace_back(new Dealer(&packOfCards));
 
+    // skip \n after number
     bool fuckingC = false;
+
     while (true) {
+        // buffer
         std::string exitString;
         std::cout << "\nPlay new game - press ENTER\nif you want to exit - write 'exit'\n";
         if (fuckingC) {
@@ -31,16 +35,25 @@ void GameTable::commonBlackJack() {
         }
         fuckingC = true;
 
+        // Bet
         for (auto it : gamers) {
-            // bet
             it->bet();
         }
 
-        // show firsts 2 cards
+        std::deque<Player *> playersWithBlackJack;
+
+        // Show firsts 2 cards3
         for (auto it : gamers) {
             it->showCards();
+
+            if (it->getScore() == 21 && typeid(*it) != typeid(Dealer)) {
+                playersWithBlackJack.push_back(it);
+            }
         }
 
+        for (auto player : playersWithBlackJack) {
+
+        }
 
         for (auto it : gamers) {
             while (!it->dialog()) { ;

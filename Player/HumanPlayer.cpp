@@ -24,14 +24,12 @@ HumanPlayer::HumanPlayer(Cards *ptr_cards) {
 
 bool HumanPlayer::dialog() {
     score = hand.getScore();
+
     std::cout << "\n######################################\n";
     std::cout << "Player [" << name << "] have " << score
               << " and cards:\n" << hand.printHand().rdbuf();
 
-    if (score > 21) {
-        std::cout << "You lose :(\n######################################\n\n";
-        return true;
-    } else {
+    if (score < 21) {
         std::cout << "Add card?\n";
 
         int userChoice;
@@ -51,6 +49,12 @@ bool HumanPlayer::dialog() {
             std::cout << "######################################\n";
             return true;
         }
+    } else if (score > 21) {
+        std::cout << "You lose :(\n######################################\n\n";
+        return true;
+    } else if (score == 21) {
+        std::cout << "Lucky day :)\n######################################\n\n";
+        return true;
     }
 }
 
