@@ -30,7 +30,7 @@ public:
     bool addCard();
 
     // destructor
-    virtual ~Hand();
+    // virtual ~Hand();
 
     void test();
 

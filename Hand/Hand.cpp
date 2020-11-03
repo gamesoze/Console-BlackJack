@@ -11,11 +11,13 @@
 // Give 2 cards in Hand
 Hand::Hand(Cards *ptr_cards) {
     // Draw 2 cards
-//    hand.push_back(ptr_cards->getCard());
-//    hand.push_back(ptr_cards->getCard());
+    hand.push_back(ptr_cards->getCard());
+    hand.push_back(ptr_cards->getCard());
 
     // Copy pointer
-    this->ptr_cards = ptr_cards->copyPointer();
+    // this->ptr_cards = ptr_cards->copyPointer();
+
+    this->ptr_cards = ptr_cards;
 }
 
 Hand::Hand() {
@@ -37,11 +39,8 @@ bool Hand::addCard() {
     }
 }
 
-Hand::~Hand() {
-    delete ptr_cards;
-}
-
 int Hand::getScore() {
+    setScore();
     return score;
 }
 

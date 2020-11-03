@@ -5,13 +5,17 @@
 #include "Player.h"
 #include "HumanPlayer.h"
 #include "Cards.h"
-#include "Hand.h"
 #include <deque>
-#include <vector>
 #include <iostream>
 
 
 TEST(Player, UsageTest) {
+
+
+}
+
+
+int main() {
     // Gamers
     std::deque<Player *> gamers;
 
@@ -19,24 +23,21 @@ TEST(Player, UsageTest) {
 
     gamers.emplace_back(new HumanPlayer(&packOfCards));
     gamers.emplace_back(new HumanPlayer(&packOfCards));
-    gamers.emplace_back(new HumanPlayer(&packOfCards));
-    gamers.emplace_back(new HumanPlayer(&packOfCards));
 
     for (auto it : gamers) {
         // bet
-
-        it->dialog();
+        it->bet();
     }
+
+    for (auto it : gamers) {
+        // bet
+        it->showCards();
+    }
+
 
 
     // Clean
     for (auto it : gamers) {
         delete it;
     }
-}
-
-
-int main() {
-    ::testing::InitGoogleTest();
-    return RUN_ALL_TESTS();
 }

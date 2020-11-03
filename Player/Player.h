@@ -9,12 +9,15 @@
 
 class Player {
 public:
+    // add_card or skip?
     virtual void dialog() = 0;
+
+    virtual void showCards() = 0;
 
     virtual ~Player() = default;
 
-    // Bet return false if not enough money
-    virtual bool bet() = 0;
+    // bet == 0 if skip
+    virtual void bet() = 0;
 
 protected:
     // Name of Player
@@ -28,6 +31,9 @@ protected:
 
     // is Passed?
     bool isPassed = false;
+
+    // bet
+    double playerBet;
 };
 
 

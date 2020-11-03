@@ -19,7 +19,8 @@ HumanPlayer::HumanPlayer(Cards *ptr_cards) {
     this->name = "Anonymous";
     this->money = 500;
 
-    Hand hand(ptr_cards);
+    // TODO fix this shit
+    hand = *(new Hand(ptr_cards));
 }
 
 void HumanPlayer::dialog() {
@@ -50,7 +51,15 @@ void HumanPlayer::dialog() {
     }
 }
 
-bool HumanPlayer::bet() {
-    std::cout << "\nHow many u want bet?\n You have: " << this->money;
-    std::cin <<
+void HumanPlayer::bet() {
+    do {
+        std::cout << "\nHow many u want bet? (0 - for skip)\n You have: " << this->money << "\n";
+        std::cin >> playerBet;
+        std::cout << std::endl;
+    } while (playerBet > money || playerBet < 0);
+}
+
+void HumanPlayer::showCards() {
+    std::cout << "Player [" << name << "] have " << hand.getScore()
+              << " and cards:\n" << hand.printHand().rdbuf();
 }

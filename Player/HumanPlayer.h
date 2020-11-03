@@ -21,7 +21,9 @@ public:
     void dialog() override;
 
     // Bet return false if not enough money
-    bool bet() override
+    void bet() override;
+
+    void showCards() override;
 
 
     ~HumanPlayer() {}
