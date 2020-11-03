@@ -4,16 +4,10 @@
 #include "gtest/gtest.h"
 #include "Player.h"
 #include "HumanPlayer.h"
+#include "Dealer.h"
 #include "Cards.h"
 #include <deque>
 #include <iostream>
-
-
-TEST(Player, UsageTest) {
-
-
-}
-
 
 int main() {
     // Gamers
@@ -21,18 +15,31 @@ int main() {
 
     Cards packOfCards;
 
+    gamers.emplace_back(new HumanPlayer(&packOfCards, "Ivan", 500));
     gamers.emplace_back(new HumanPlayer(&packOfCards));
-    gamers.emplace_back(new HumanPlayer(&packOfCards));
+    gamers.emplace_back(new Dealer(&packOfCards));
 
     for (auto it : gamers) {
         // bet
         it->bet();
     }
 
+    // show firsts 2 cards
     for (auto it : gamers) {
-        // bet
         it->showCards();
     }
+
+
+    for (auto it : gamers) {
+        while (!it->dialog()) { ;
+        }
+    }
+
+    // show all cards
+    for (auto it : gamers) {
+        it->showCards();
+    }
+
 
 
 
@@ -40,4 +47,6 @@ int main() {
     for (auto it : gamers) {
         delete it;
     }
+
+    return 0;
 }

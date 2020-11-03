@@ -10,6 +10,8 @@
 class Rools {
 public:
     static int getScore(const std::deque<std::string> &input);
+
+    static int getScore(std::string input);
 };
 
 

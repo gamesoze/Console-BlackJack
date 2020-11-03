@@ -53,7 +53,7 @@ const std::stringstream Hand::printHand() const {
 
 
     for (int i = 0; i < hand.size(); ++i) {
-        ss_hand << "Card [" << std::to_string(i) << "] " << hand[i] << "\n";
+        ss_hand << "Card [" << std::to_string(i + 1) << "] " << hand[i] << "\n";
     }
 
     return ss_hand;
@@ -63,5 +63,18 @@ void Hand::test() {
     ptr_cards->printPack();
 }
 
+const std::deque<std::string> &Hand::getHand() const {
+    return hand;
+}
 
+void Hand::refresh() {
+    // delete old
+    for (auto str : hand) {
+        hand.pop_back();
+    }
+
+    // add 2 new cards
+    hand.emplace_back(ptr_cards->getCard());
+    hand.emplace_back(ptr_cards->getCard());
+}
 

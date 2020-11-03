@@ -8,7 +8,8 @@ add_subdirectory(modules/googletest)
 add_subdirectory(Hand)
 add_subdirectory(Rools)
 add_subdirectory(Player)
+add_subdirectory(GameTable)
 
 add_executable(Console-BlackJack main.cpp)
 
-target_link_libraries(Console-BlackJack Cards Hand Rools Player)
+target_link_libraries(Console-BlackJack GameTable Player Hand Rools Cards)

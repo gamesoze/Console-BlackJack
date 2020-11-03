@@ -32,7 +32,12 @@ public:
     // destructor
     // virtual ~Hand();
 
+    // TODO delete after all test
     void test();
+
+    const std::deque<std::string> &getHand() const;
+
+    void refresh();
 
 private:
     // Rools::getScore(hand)

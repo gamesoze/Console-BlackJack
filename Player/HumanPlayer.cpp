@@ -11,7 +11,6 @@
 HumanPlayer::HumanPlayer(Cards *ptr_cards, std::string name, double money) {
     this->name = name;
     this->money = money;
-
     this->hand = Hand(ptr_cards);
 }
 
@@ -23,13 +22,15 @@ HumanPlayer::HumanPlayer(Cards *ptr_cards) {
     hand = *(new Hand(ptr_cards));
 }
 
-void HumanPlayer::dialog() {
-    std::cout << "Player [" << name << "] have " << hand.getScore()
+bool HumanPlayer::dialog() {
+    score = hand.getScore();
+    std::cout << "\n######################################\n";
+    std::cout << "Player [" << name << "] have " << score
               << " and cards:\n" << hand.printHand().rdbuf();
 
-    if (hand.getScore() > 21) {
-        isPassed = true;
-        return;
+    if (score > 21) {
+        std::cout << "You lose :(\n######################################\n\n";
+        return true;
     } else {
         std::cout << "Add card?\n";
 
@@ -41,25 +42,46 @@ void HumanPlayer::dialog() {
 
         if (userChoice == 1) {
             hand.addCard();
-            std::cout << "\nPlayer [" << name << "] have " << hand.getScore()
+            score = hand.getScore();
+            std::cout << "\nPlayer [" << name << "] have " << score
                       << " and cards:\n" << hand.printHand().rdbuf();
-            isPassed = true;
-            return;
+            std::cout << "######################################\n";
+            return false;
         } else {
-            return;
+            std::cout << "######################################\n";
+            return true;
         }
     }
 }
 
 void HumanPlayer::bet() {
     do {
-        std::cout << "\nHow many u want bet? (0 - for skip)\n You have: " << this->money << "\n";
+        std::cout << "\n######################################\nPlayer: " << name;
+        std::cout << "\nHow many u want bet?\tYou have: "
+                  << this->money << "\n";
         std::cin >> playerBet;
-        std::cout << std::endl;
+        std::cout << "######################################\n";
     } while (playerBet > money || playerBet < 0);
 }
 
 void HumanPlayer::showCards() {
-    std::cout << "Player [" << name << "] have " << hand.getScore()
+    score = hand.getScore();
+    std::cout << "Player [" << name << "] have " << score
               << " and cards:\n" << hand.printHand().rdbuf();
+}
+
+int HumanPlayer::getScore() const {
+    return score;
+}
+
+void HumanPlayer::betAccrual(double playerBet) {
+    money += playerBet;
+}
+
+const double HumanPlayer::getPlayerBet() const {
+    return playerBet;
+}
+
+void HumanPlayer::refreshHand() {
+    hand.refresh();
 }

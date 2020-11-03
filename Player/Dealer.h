@@ -9,9 +9,25 @@
 
 class Dealer : public Player {
 public:
-    void dialog() override {};
+    explicit Dealer(Cards *ptr_cards);
+
+    // until < 17
+    bool dialog() override;
+
+    void bet() override {};
+
+    int getScore() const override { return score; }
+
+    void betAccrual(double playerBet) override { money += playerBet; }
+
+    const double getPlayerBet() const override { return 0.0; }
+
+    void refreshHand() override { hand.refresh(); }
 
     void showCards() override;
+
+private:
+    bool isFirst = true;
 };
 
 

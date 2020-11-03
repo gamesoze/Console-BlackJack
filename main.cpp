@@ -5,13 +5,10 @@
 #include <iostream>
 #include "Hand.h"
 #include "HumanPlayer.h"
-
+#include "GameTable.h"
 
 int main() {
-    Cards pack;
-
-    HumanPlayer player_1(&pack);
-
+    GameTable::commonBlackJack();
 
     return 0;
 }

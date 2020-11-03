@@ -10,30 +10,38 @@
 class Player {
 public:
     // add_card or skip?
-    virtual void dialog() = 0;
+    virtual bool dialog() = 0;
 
     virtual void showCards() = 0;
 
     virtual ~Player() = default;
+
+    virtual int getScore() const = 0;
+
+    virtual void betAccrual(double playerBet) = 0;
+
+    virtual const double getPlayerBet() const = 0;
+
+    virtual void refreshHand() = 0;
 
     // bet == 0 if skip
     virtual void bet() = 0;
 
 protected:
     // Name of Player
-    std::string name;
+    std::string name = "Anon";
 
     // Count money
-    double money;
+    double money = 0;
 
     // Hand
     Hand hand;
 
-    // is Passed?
-    bool isPassed = false;
-
     // bet
-    double playerBet;
+    double playerBet = 0;
+
+    // score
+    int score = 0;
 };
 
 

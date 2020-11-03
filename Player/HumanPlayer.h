@@ -18,15 +18,26 @@ public:
     HumanPlayer(Cards *ptr_cards, std::string name, double money);
 
     // Dialog to user
-    void dialog() override;
+    bool dialog() override;
 
     // Bet return false if not enough money
     void bet() override;
 
+    // return score
+    int getScore() const override;
+
+    // + or - playerBet
+    void betAccrual(double playerBet) override;
+
+    const double getPlayerBet() const override;
+
+    // show all cards
     void showCards() override;
 
+    // delete old cards
+    void refreshHand() override;
 
-    ~HumanPlayer() {}
+    ~HumanPlayer() override = default;
 };
 
 
