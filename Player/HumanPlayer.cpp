@@ -22,7 +22,7 @@ HumanPlayer::HumanPlayer(Cards *ptr_cards) {
     hand = *(new Hand(ptr_cards));
 }
 
-bool HumanPlayer::dialog() {
+bool HumanPlayer::dialog(bool isDealerHas1011) {
     score = hand.getScore();
 
     std::cout << "\n######################################\n";
@@ -54,6 +54,20 @@ bool HumanPlayer::dialog() {
         return true;
     } else if (score == 21) {
         std::cout << "Lucky day :)\n######################################\n\n";
+
+        if (isDealerHas1011) {
+            std::cout << "The dealer can have blackjack. You can pick up your bet\n";
+
+            // check for bullshit
+            int userChoice;
+            do {
+                std::cout << "0 - Pick up your bet\n1 - Continue playing\n";
+                std::cin >> userChoice;
+            } while (userChoice > 1 || userChoice < 0);
+
+            return userChoice == 1;
+        }
+
         return true;
     }
 }

@@ -5,10 +5,19 @@
 #ifndef CONSOLE_BLACKJACK_GAMETABLE_H
 #define CONSOLE_BLACKJACK_GAMETABLE_H
 
+#include "../Player/Player.h"
+
 
 class GameTable {
 public:
+    // main
     static void commonBlackJack();
+
+    static void addPlayers(std::deque<Player *> &gamers);
+
+private:
+    static Player *ptr_dealer;
+    static Cards *ptr_cards;
 };
 
 

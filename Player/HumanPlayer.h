@@ -18,7 +18,7 @@ public:
     HumanPlayer(Cards *ptr_cards, std::string name, double money);
 
     // Dialog to user
-    bool dialog() override;
+    bool dialog(bool isDealerHas1011 = false) override;
 
     // Bet return false if not enough money
     void bet() override;

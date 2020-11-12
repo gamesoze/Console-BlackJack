@@ -9,12 +9,13 @@
 #include "Dealer.h"
 
 void Dealer::showCards() {
-    score = Rools::getScore(hand.getHand());
     if (isFirst) {
-        std::cout << "Dealer have " << Rools::getScore(hand.getHand().at(0))
+        score = Rools::getScore(hand.getHand().at(0));
+        std::cout << "Dealer have " << score
                   << " and card:\n" << "Card [0] " << hand.getHand().at(0);
         isFirst = false;
     } else {
+        score = Rools::getScore(hand.getHand());
         std::cout << "Dealer have " << score
                   << " and card:\n" << hand.printHand().str();
     }
@@ -28,7 +29,7 @@ Dealer::Dealer(Cards *ptr_cards) {
     hand = *(new Hand(ptr_cards));
 }
 
-bool Dealer::dialog() {
+bool Dealer::dialog(bool isDealerHas1011) {
     if (score < 17) {
         hand.addCard();
         score = hand.getScore();

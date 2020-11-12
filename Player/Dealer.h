@@ -12,7 +12,7 @@ public:
     explicit Dealer(Cards *ptr_cards);
 
     // until < 17
-    bool dialog() override;
+    bool dialog(bool isDealerHas1011 = false) override;
 
     void bet() override {};
 
@@ -26,7 +26,9 @@ public:
 
     void showCards() override;
 
+
 private:
+    // for first open cards
     bool isFirst = true;
 };
 
