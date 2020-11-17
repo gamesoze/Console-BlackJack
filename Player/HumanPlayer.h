@@ -38,6 +38,11 @@ public:
     void refreshHand() override;
 
     ~HumanPlayer() override = default;
+
+private:
+    void outputResultMessage(double bet) override;
+
+    int getScoresBeforeShowdown() const override;
 };
 
 

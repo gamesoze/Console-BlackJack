@@ -15,6 +15,10 @@ public:
 
     static void addPlayers(std::deque<Player *> &gamers);
 
+    static bool mainSwitch();
+
+    static bool findNotRisk(Player *gamer, const std::deque<Player *> &playersWhoDecidedNotRisk);
+
 private:
     static Player *ptr_dealer;
     static Cards *ptr_cards;

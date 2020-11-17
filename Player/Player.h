@@ -25,6 +25,11 @@ public:
     virtual void refreshHand() = 0;
 
     virtual void bet() = 0;
+
+    virtual void outputResultMessage(double bet) = 0;
+
+    virtual int getScoresBeforeShowdown() const = 0;
+
 protected:
     // Name of Player
     std::string name = "Anon";

@@ -22,14 +22,19 @@ public:
 
     const double getPlayerBet() const override { return 0.0; }
 
-    void refreshHand() override { hand.refresh(); }
+    void refreshHand() override;
 
     void showCards() override;
 
+    int getScoresBeforeShowdown() const;
 
 private:
     // for first open cards
     bool isFirst = true;
+
+    void outputResultMessage(double bet) override {}
+
+    int scoresBeforShowdown;
 };
 
 

@@ -53,8 +53,6 @@ bool HumanPlayer::dialog(bool isDealerHas1011) {
         std::cout << "You lose :(\n######################################\n\n";
         return true;
     } else if (score == 21) {
-        std::cout << "Lucky day :)\n######################################\n\n";
-
         if (isDealerHas1011) {
             std::cout << "The dealer can have blackjack. You can pick up your bet\n";
 
@@ -67,7 +65,7 @@ bool HumanPlayer::dialog(bool isDealerHas1011) {
 
             return userChoice == 1;
         }
-
+        std::cout << "Lucky day :)\n######################################\n\n";
         return true;
     }
 }
@@ -94,6 +92,7 @@ int HumanPlayer::getScore() const {
 
 void HumanPlayer::betAccrual(double playerBet) {
     money += playerBet;
+    outputResultMessage(playerBet);
 }
 
 const double HumanPlayer::getPlayerBet() const {
@@ -102,4 +101,21 @@ const double HumanPlayer::getPlayerBet() const {
 
 void HumanPlayer::refreshHand() {
     hand.refresh();
+}
+
+void HumanPlayer::outputResultMessage(double bet) {
+    std::cout << "\n######################################\n";
+    std::cout << "Player [" << name << "] ";
+    if (bet > 0) {
+        std::cout << "win " << bet << std::endl;
+    } else if (bet < 0) {
+        std::cout << "lose " << -bet << std::endl;
+    } else {
+        std::cout << "returned the bet " << std::endl;
+    }
+    std::cout << "######################################\n";
+}
+
+int HumanPlayer::getScoresBeforeShowdown() const {
+    return 0;
 }

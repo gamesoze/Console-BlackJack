@@ -9,13 +9,13 @@
 #include "Dealer.h"
 
 void Dealer::showCards() {
+    score = Rools::getScore(hand.getHand());
     if (isFirst) {
-        score = Rools::getScore(hand.getHand().at(0));
-        std::cout << "Dealer have " << score
+        scoresBeforShowdown = Rools::getScore(hand.getHand().at(0));
+        std::cout << "Dealer have " << scoresBeforShowdown
                   << " and card:\n" << "Card [0] " << hand.getHand().at(0);
         isFirst = false;
     } else {
-        score = Rools::getScore(hand.getHand());
         std::cout << "Dealer have " << score
                   << " and card:\n" << hand.printHand().str();
     }
@@ -37,4 +37,13 @@ bool Dealer::dialog(bool isDealerHas1011) {
     } else {
         return true;
     }
+}
+
+int Dealer::getScoresBeforeShowdown() const {
+    return scoresBeforShowdown;
+}
+
+void Dealer::refreshHand() {
+    hand.refresh();
+    this->isFirst = true;
 }

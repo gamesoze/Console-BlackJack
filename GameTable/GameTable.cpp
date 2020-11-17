@@ -7,6 +7,11 @@
 #include <iostream>
 #include <string>
 #include <typeinfo>
+// for numeric_limits
+#include<limits>
+// for <streamsize>
+#include<ios>
+#include <stdlib.h>
 
 Player *GameTable::ptr_dealer;
 Cards *GameTable::ptr_cards;
@@ -18,20 +23,10 @@ void GameTable::commonBlackJack() {
 
     addPlayers(gamers);
 
-    // skip \n after number
-    bool fuckingC = false;
     while (true) {
-        // buffer
-        std::string exitString;
-        std::cout << "\nPlay new game - press ENTER\nif you want to exit - write 'exit'\n";
-        if (fuckingC) {
-            std::cin.get();
-        }
-        std::getline(std::cin, exitString);
-        if (exitString == "exit") {
+        if (mainSwitch()) {
             break;
         }
-        fuckingC = true;
 
         // Bet
         for (auto it : gamers) {
@@ -43,76 +38,90 @@ void GameTable::commonBlackJack() {
             it->showCards();
         }
 
-        bool isDealerHas1011 = ptr_dealer->getScore() >= 10;
+        bool isDealerHas1011 = ptr_dealer->getScoresBeforeShowdown() >= 10;
 
-
-        std::deque<Player *> playersWhoDecidedRisk;
+        std::deque<Player *> playersWhoDecidedNotRisk;
         // draw phase
         for (auto it : gamers) {
+            // communication with the player while he is not pass
+            while (!it->dialog());
+
             // when player has 21 and dealer maybe has 21
-            if (it != ptr_dealer && it->getScore() == 21 && isDealerHas1011) {
+            if (it != ptr_dealer &&
+                it->getScore() == 21 &&
+                isDealerHas1011) {
                 // true     == risk
                 // false    == pick up bet
-                if (it->dialog(isDealerHas1011)) {
-                    playersWhoDecidedRisk.push_back(it);
-                }
-            } else {
-                // communication with the player while he is not pass
-                while (!it->dialog()) { ;
+                if (!it->dialog(isDealerHas1011)) {
+                    playersWhoDecidedNotRisk.push_back(it);
                 }
             }
         }
 
         // show all cards
-        int scoresDealer;
         for (auto it : gamers) {
-            if (typeid(*it) == typeid(Dealer))
-                scoresDealer = it->getScore();
             it->showCards();
         }
+        int scoresDealer = ptr_dealer->getScore();
 
-        // all wins
         if (scoresDealer > 21) {
-            for (auto it : gamers) {
-                if (it->getScore() <= 21) {
-                    it->betAccrual(it->getPlayerBet());
+
+            // all wins
+            for (auto gamer : gamers) {
+                if (gamer->getScore() == 21) {
+                    if (!findNotRisk(gamer, playersWhoDecidedNotRisk)) {
+                        gamer->betAccrual(gamer->getPlayerBet() * 3 / 2);
+                    }
+                } else if (gamer->getScore() < 21) {
+                    gamer->betAccrual(gamer->getPlayerBet());
                 } else {
-                    it->betAccrual(-it->getPlayerBet());
+                    gamer->betAccrual(-gamer->getPlayerBet());
                 }
             }
-        } else {    // player wins if (21 > scorePlayer > scoreDealer)
-            for (auto it : gamers) {
-                if (it->getScore() > scoresDealer && it->getScore() <= 21) {
-                    // small flag
-                    bool isFoundRisk = false;
-                    // find risk man
-                    for (auto risk : playersWhoDecidedRisk) {
-                        if (risk == it) {
-                            it->betAccrual(it->getPlayerBet() * 3 / 2);
-                            isFoundRisk = true;
-                            break;
+
+            // player wins if (21 > scorePlayer > scoreDealer)
+        } else {
+
+            // scoreDealer <= 21
+            for (auto gamer : gamers) {
+
+                if (gamer->getScore() > scoresDealer) {
+                    if (gamer->getScore() == 21) {
+                        if (!findNotRisk(gamer, playersWhoDecidedNotRisk)) {
+                            gamer->betAccrual(gamer->getPlayerBet() * 3 / 2);
                         }
+                    } else if (gamer->getScore() < 21) {
+                        gamer->betAccrual(gamer->getPlayerBet());
+                    } else {
+                        gamer->betAccrual(-gamer->getPlayerBet());
                     }
-                    // if not found
-                    if (!isFoundRisk) {
-                        it->betAccrual(it->getPlayerBet());
+
+                } else if (gamer->getScore() == 21 && scoresDealer == 21) {
+                    if (!findNotRisk(gamer, playersWhoDecidedNotRisk)) {
+                        gamer->betAccrual(-gamer->getPlayerBet());
                     }
                 } else {
-                    it->betAccrual(-it->getPlayerBet());
+                    gamer->betAccrual(-gamer->getPlayerBet());
                 }
             }
+
         }
 
         for (auto it : gamers) {
             it->refreshHand();
         }
 
+        // discards the input buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //system("cls");
     }
 
     // Clean
     for (auto it : gamers) {
         delete it;
     }
+
+    delete ptr_cards;
 }
 
 void GameTable::addPlayers(std::deque<Player *> &gamers) {
@@ -134,4 +143,29 @@ void GameTable::addPlayers(std::deque<Player *> &gamers) {
         std::cerr << "GAMETABLE::ADDPLAYER::NO DEALER!";
         exit(-1);
     }
+}
+
+// skip \n after number
+bool GameTable::mainSwitch() {
+    // buffer
+    std::string exitString;
+    std::cout << "\nPlay new game - press ENTER\nif you want to exit - write 'exit'\n";
+
+    std::getline(std::cin, exitString);
+    if (exitString == "exit") {
+        return true;
+    }
+    return false;
+}
+
+bool GameTable::findNotRisk(Player *gamer,
+                            const std::deque<Player *> &playersWhoDecidedNotRisk) {
+    for (auto notRisk : playersWhoDecidedNotRisk) {
+        if (notRisk == gamer) {
+            // nothing
+            gamer->betAccrual(0);
+            return true;
+        }
+    }
+    return false;
 }
