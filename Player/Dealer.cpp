@@ -13,7 +13,7 @@ void Dealer::showCards() {
     if (isFirst) {
         scoresBeforShowdown = Rools::getScore(hand.getHand().at(0));
         std::cout << "Dealer have " << scoresBeforShowdown
-                  << " and card:\n" << "Card [0] " << hand.getHand().at(0);
+                  << " and card:\n" << "Card [1] " << hand.getHand().at(0);
         isFirst = false;
     } else {
         std::cout << "Dealer have " << score
