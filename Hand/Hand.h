@@ -27,7 +27,7 @@ public:
     const std::stringstream printHand() const;
 
     // get a new card
-    bool addCard();
+    bool addCard(bool isBeginRound = false);
 
     // destructor
     // virtual ~Hand();

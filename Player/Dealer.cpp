@@ -29,7 +29,7 @@ Dealer::Dealer(Cards *ptr_cards) {
     hand = *(new Hand(ptr_cards));
 }
 
-bool Dealer::dialog(bool isDealerHas1011) {
+int Dealer::dialog(bool isDealerHas1011) {
     if (score < 17) {
         hand.addCard();
         score = hand.getScore();
@@ -44,6 +44,10 @@ int Dealer::getScoresBeforeShowdown() const {
 }
 
 void Dealer::refreshHand() {
+    // refresh pack cards
+    hand.addCard(true);
+    // refresh hand
     hand.refresh();
+
     this->isFirst = true;
 }

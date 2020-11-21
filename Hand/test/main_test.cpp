@@ -12,13 +12,22 @@ TEST(Hand_basic_test, UsageTest) {
 
     Hand left(&pack);
 
-    for (int i = 0; i < 1000; ++i) {
-        for (int i = 0; i < 1000; ++i) {
-            left.addCard();
-        }
 
-        ASSERT_LE(left.getScore(), 31);
+    int max = 0;
+
+    for (int j = 0; j < 10000; ++j) {
+        int sum = 0;
+        for (int i = 0; i < 10; ++i) {
+            sum = left.getScore();
+        }
+        left.addCard(true);
+
+        if (max < sum) {
+            max = sum;
+        }
     }
+
+    ASSERT_LE(max, 31);
 }
 
 int main() {

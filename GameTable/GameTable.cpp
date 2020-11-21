@@ -38,22 +38,42 @@ void GameTable::commonBlackJack() {
             it->showCards();
         }
 
-        bool isDealerHas1011 = ptr_dealer->getScoresBeforeShowdown() >= 10;
+        // Only ÒÓÇ
+        bool isDealerHas1011 = ptr_dealer->getScoresBeforeShowdown() >= 11;
 
-        std::deque<Player *> playersWhoDecidedNotRisk;
+        std::vector<Player *> playersWhoDecidedDouble;
+        std::vector<Player *> playersWhoDecidedNotRisk;
         // draw phase
-        for (auto it : gamers) {
-            // communication with the player while he is not pass
-            while (!it->dialog());
+        for (auto gamer : gamers) {
+            if (gamer->getScore() > 11 ||
+                gamer->getScore() < 10 ||
+                gamer == ptr_dealer) {
+                // communication with the player while he is not pass
+                while (!gamer->dialog());
+
+            } else {
+                int status = gamer->dialog();
+                if (!status) {
+                    while (!status) {
+                        status = gamer->dialog();
+                        if (status == 2) {
+                            gamer->bet(true);
+                        }
+                    }
+                } else if (status == 2) {
+                    gamer->bet(true);
+                }
+
+            }
 
             // when player has 21 and dealer maybe has 21
-            if (it != ptr_dealer &&
-                it->getScore() == 21 &&
+            if (gamer != ptr_dealer &&
+                gamer->getScore() == 21 &&
                 isDealerHas1011) {
                 // true     == risk
                 // false    == pick up bet
-                if (!it->dialog(isDealerHas1011)) {
-                    playersWhoDecidedNotRisk.push_back(it);
+                if (!gamer->dialog(isDealerHas1011)) {
+                    playersWhoDecidedNotRisk.push_back(gamer);
                 }
             }
         }
@@ -159,7 +179,7 @@ bool GameTable::mainSwitch() {
 }
 
 bool GameTable::findNotRisk(Player *gamer,
-                            const std::deque<Player *> &playersWhoDecidedNotRisk) {
+                            const std::vector<Player *> &playersWhoDecidedNotRisk) {
     for (auto notRisk : playersWhoDecidedNotRisk) {
         if (notRisk == gamer) {
             // nothing

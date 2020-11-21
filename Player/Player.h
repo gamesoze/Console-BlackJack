@@ -10,7 +10,7 @@
 class Player {
 public:
     // add_card or skip?
-    virtual bool dialog(bool isDealerHas1011 = false) = 0;
+    virtual int dialog(bool isDealerHas1011 = false) = 0;
 
     virtual void showCards() = 0;
 
@@ -24,7 +24,7 @@ public:
 
     virtual void refreshHand() = 0;
 
-    virtual void bet() = 0;
+    virtual void bet(bool isDouble = false) = 0;
 
     virtual void outputResultMessage(double bet) = 0;
 

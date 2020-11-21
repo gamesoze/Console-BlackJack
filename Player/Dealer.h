@@ -12,9 +12,9 @@ public:
     explicit Dealer(Cards *ptr_cards);
 
     // until < 17
-    bool dialog(bool isDealerHas1011 = false) override;
+    int dialog(bool isDealerHas1011 = false) override;
 
-    void bet() override {};
+    void bet(bool isDouble = false) override {};
 
     int getScore() const override { return score; }
 

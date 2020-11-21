@@ -29,7 +29,12 @@ Hand::Hand() {
 //    hand.push_back(ptr_cards->getCard());
 }
 
-bool Hand::addCard() {
+bool Hand::addCard(bool isBeginRound) {
+
+    if (isBeginRound) {
+        ptr_cards->getCard(isBeginRound);
+    }
+
     if (score < 21) {
         hand.push_back(ptr_cards->getCard());
         setScore();

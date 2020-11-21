@@ -17,7 +17,7 @@ public:
 
     static bool mainSwitch();
 
-    static bool findNotRisk(Player *gamer, const std::deque<Player *> &playersWhoDecidedNotRisk);
+    static bool findNotRisk(Player *gamer, const std::vector<Player *> &playersWhoDecidedNotRisk);
 
 private:
     static Player *ptr_dealer;
